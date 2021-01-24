@@ -6,6 +6,7 @@ public class Gumball : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb2d;
+    public GameObject gum;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,13 @@ public class Gumball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //hit enemey
+        Destroy(rb2d.gameObject);
+
+        if (collision.tag == "Enemy")
+        {
+            collision.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            collision.GetComponent<Spider>().speed = 0;
+            Instantiate(gum, collision.transform.position, Quaternion.identity);
+        }
     }
 }
