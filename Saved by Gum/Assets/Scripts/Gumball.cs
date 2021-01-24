@@ -16,7 +16,11 @@ public class Gumball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(rb2d.gameObject);
+        if (collision.tag != "Player") {
+
+            Destroy(rb2d.gameObject);
+
+        }
 
         if (collision.tag == "Enemy")
         {
